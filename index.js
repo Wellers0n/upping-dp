@@ -12,12 +12,12 @@ app.get("/", (req, res) => {
 
 // Definir outra rota
 app.get("/about", (req, res) => {
-  res.status.json({ message: "Page about express." });
+  res.status(200).json({ message: "Page about express." });
 });
 
 app.get("/user/:id", (req, res) => {
   const userId = req.params.id;
-  res.status.json({ message: `user profile with ID ${userId}` });
+  res.status(200).json({ message: `user profile with ID ${userId}` });
 });
 
 // Iniciar o servidor
