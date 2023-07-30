@@ -7,17 +7,17 @@ const port = 80; // Porta em que o servidor irá rodar
 
 // Definir uma rota básica
 app.get("/", (req, res) => {
-  res.send("hello world");
+  res.status(200).json({ message: "server is running" });
 });
 
 // Definir outra rota
 app.get("/about", (req, res) => {
-  res.send("Page about express.");
+  res.status.json({ message: "Page about express." });
 });
 
 app.get("/user/:id", (req, res) => {
   const userId = req.params.id;
-  res.send(`user profile with ID ${userId}`);
+  res.status.json({ message: `user profile with ID ${userId}` });
 });
 
 // Iniciar o servidor
