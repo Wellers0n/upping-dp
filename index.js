@@ -3,11 +3,11 @@ const express = require("express");
 
 // Criar uma instância do Express
 const app = express();
-const port = 3000; // Porta em que o servidor irá rodar
+const port = 80; // Porta em que o servidor irá rodar
 
 // Definir uma rota básica
 app.get("/", (req, res) => {
-  res.send("hello world express");
+  res.send("hello world");
 });
 
 // Definir outra rota
