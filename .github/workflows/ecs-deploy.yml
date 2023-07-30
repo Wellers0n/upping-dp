@@ -7,13 +7,17 @@ on:
 
 env:
   AWS_REGION: us-east-1 # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: ecs-demo-example # set this to your Amazon ECR repository name
-  ECS_SERVICE: sv-v20 # set this to your Amazon ECS service name
-  ECS_CLUSTER: cluster-ecs-demo-example # set this to your Amazon ECS cluster name
+  ECR_REPOSITORY: ecr-upping-dp # set this to your Amazon ECR repository name
+  ECS_SERVICE: sv-upping-dp # set this to your Amazon ECS service name
+  ECS_CLUSTER: cluster-upping-dp # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: task-definition.json # set this to the path to your Amazon ECS task definition
   CONTAINER_NAME:
-    ecs-demo-example # set this to the name of the container in the
+    td-upping-dp # set this to the name of the container in the
     # containerDefinitions section of your task definition
+  ECS_ENVIROMENTS: |
+    TEST=${{secrets.TEST}}
+    HOST=${{secrets.HOST}}
+    PORT=${{secrets.PORT}}
 
 permissions:
   id-token: write
@@ -66,6 +70,7 @@ jobs:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
+          environment-variables: ${{ env.ECS_ENVIROMENTS }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
