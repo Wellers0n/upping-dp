@@ -9,11 +9,11 @@ env:
   AWS_REGION: us-east-1 # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: ecr-upping-dp # set this to your Amazon ECR repository name
   ECS_SERVICE: sv-upping-dp # set this to your Amazon ECS service name
-  TASK_DEFINITION: td-upping-dp # set this to your Amazon ECS service name
+  TASK_DEFINITION_NAME: td-upping-dp # set this to your Amazon ECS service name
   ECS_CLUSTER: cluster-upping-dp # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: task-definition.json # set this to the path to your Amazon ECS task definition
   CONTAINER_NAME:
-    td-upping-dp # set this to the name of the container in the
+    ecr-upping-dp # set this to the name of the container in the
     # containerDefinitions section of your task definition
   ECS_ENVIROMENTS: |
     TEST=${{secrets.TEST}}
@@ -48,7 +48,7 @@ jobs:
       - name: Describe task-definition
         run: |
           aws ecs describe-task-definition \
-          --task-definition td-upping-dp \
+          --task-definition ${{ env.TASK_DEFINITION_NAME }} \
           --query taskDefinition > task-definition.json
 
       - name: Build, tag, and push image to Amazon ECR
@@ -68,7 +68,7 @@ jobs:
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: ${{ env.TASK_DEFINITION }}
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
           environment-variables: ${{ env.ECS_ENVIROMENTS }}
