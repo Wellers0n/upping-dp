@@ -48,7 +48,7 @@ jobs:
       - name: Describe task-definition
         run: |
           aws ecs describe-task-definition \
-          --task-definition ${{ env.TASK_DEFINITION }} \
+          --task-definition td-upping-dp \
           --query taskDefinition > task-definition.json
 
       - name: Build, tag, and push image to Amazon ECR
