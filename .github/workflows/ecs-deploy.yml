@@ -10,7 +10,7 @@ env:
   ECR_REPOSITORY: ecr-upping-dp # set this to your Amazon ECR repository name
   ECS_SERVICE: sv-upping-dp # set this to your Amazon ECS service name
   TASK_DEFINITION_NAME: td-upping-dp # set this to your Amazon ECS service name
-  ECS_CLUSTER: cluster-upping-dp # set this to your Amazon ECS cluster name
+  ECS_CLUSTER: clusterr-upping-dp # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: task-definition.json # set this to the path to your Amazon ECS task definition
   CONTAINER_NAME:
     ecr-upping-dp # set this to the name of the container in the
